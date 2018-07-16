@@ -1,7 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloProvider } from 'react-apollo';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import ApolloClient from 'apollo-client';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import App from './App';
+import Routes from './routes';
+
+const client = new ApolloClient({
+  link: new HttpLink({ uri: 'http://localhost:3000/graphql' }),
+  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+});
+
+const App = () => (
+  <ApolloProvider client={client}>
+    <Routes />
+  </ApolloProvider>
+);
 
 ReactDOM.render(<App />, document.getElementById('root'));
