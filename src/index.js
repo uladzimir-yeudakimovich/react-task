@@ -5,6 +5,8 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import ApolloClient from 'apollo-client';
 
+import { Navbar }  from "react-bootstrap";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Routes from './routes';
@@ -16,6 +18,11 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
+  <Navbar>
+    <a href="/">Home</a>
+    <a href="register">Registration</a>
+    <a href="login">Login</a>
+  </Navbar>
     <Routes />
   </ApolloProvider>
 );

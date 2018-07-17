@@ -1,7 +1,5 @@
 import React from 'react';
 import { FormControl, Checkbox, Button }  from "react-bootstrap";
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 
 export default class Register extends React.Component {
   constructor() {
@@ -10,31 +8,52 @@ export default class Register extends React.Component {
       username: '',
       email: '',
       password: '',
-      isManager: false,
+      isManager: false
     };
   }
 
-  onChange = (e) => {
+  onChange(e) {
     if (e.target.name === 'isManager') {
       this.setState({
-        [e.target.name]: e.target.checked,
+        [e.target.name]: e.target.checked
       })
     } else {
       this.setState({
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value
       })
     }
   }
 
-  onSubmit = async (e) => {
-    const response = await this.props.mutate({
-      variables: this.state,
-    });
+  onSubmit() {
+    const data = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      isManager: this.state.isManager
+    }
+    console.log(data)
+    // fetch("/", {
+    //   method: 'POST',
+    //   headers: {'Content-Type': 'application/json'},
+    //   body: JSON.stringify(data)
+    // }).then(function(response) {
+    //   if (response.status >= 400) {
+    //     throw new Error("Bad response from server");
+    //   }
+    //   return response.json();
+    // }).then(function(data) {
+    //   console.log(data)
+    //   if(data == "success"){
+    //     this.setState({msg: "Thanks for registering"});
+    //   }
+    // }).catch(function(err) {
+    //   console.log(err)
+    // });
   }
 
   render() {
     return (
-      <div>
+      <form className="container">
         <FormControl
           name="username"
           placeholder="Username"
@@ -59,23 +78,13 @@ export default class Register extends React.Component {
           Manager?
         </Checkbox>
         <Button
-          bsStyle="primary"
+          className="btn-primary"
           onClick={() => this.onSubmit()}
         >
           Submit
         </Button>
-      </div>
+      </form>
     );
   }
 }
-
-const mutation = gql`
-  mutation($username: String, $email: String!, password: String!, $isManager: Boolean) {
-    register(username: $username, email: $email, password: $password, isManager: $isManager) {
-      id
-    }
-  }
-`;
-
-export default graphql(mutation)(Register);
 
