@@ -1,5 +1,6 @@
 body {
-  height: 600px;
+  height: 100%;
+  min-height: 600px;
   background: url(./photo.jpg) no-repeat center center;
   background-size: cover;
 }
