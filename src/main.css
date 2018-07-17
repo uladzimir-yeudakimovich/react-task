@@ -1,0 +1,11 @@
+body {
+  height: 600px;
+  background: url(./photo.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.nav {
+  background-color: white;
+  font-weight: 900;
+  font-size: 20px;
+}
