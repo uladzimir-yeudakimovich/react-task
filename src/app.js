@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const { showRequestLogger, saveRequestLogger } = require('./middleware/logger');
 const infoRouter = require('./routers/info/info.router');
@@ -7,6 +8,7 @@ const unknownEndpoint = require('./middleware/unknown-endpoint');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(showRequestLogger);
 app.use(saveRequestLogger);
