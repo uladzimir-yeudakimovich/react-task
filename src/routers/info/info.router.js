@@ -4,7 +4,10 @@ const infoService = require('./info.service');
 
 router.route('/').get(async (req, res) => {
   const info = await infoService.getData();
-  res.json(`Phonebook has info for ${info} people ${new Date()}`);
+  res.send(`
+    <p>Phonebook has info for ${info} people</p>
+    <p>${new Date()}</p>
+  `);
 });
 
 module.exports = router;

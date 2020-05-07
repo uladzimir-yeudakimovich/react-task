@@ -8,3 +8,8 @@
   body: {"name":"admin","number":"123-123-123"}, params: {},
   timestamp: Thu, 07 May 2020 22:10:20 GMT
 }
+{
+  url: '/info', method: 'GET', status: 200, time: 8.338 ms,
+  body: {}, params: {},
+  timestamp: Thu, 07 May 2020 22:13:43 GMT
+}
