@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "fullstack-app-back-end",
   "version": "0.0.1",
-  "description": "back-end for phone-book",
+  "description": "fullstack-app-back-end",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
