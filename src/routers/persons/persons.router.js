@@ -22,7 +22,7 @@ router.route('/').post(async (req, res) => {
   const { body } = req;
   const { name, number } = body;
   if (!name || !number) {
-    return res.status(400).json({ error: 'content missing' });
+    return res.status(400).send({ error: 'content missing' });
   }
   const person = await personsService.addUser(body);
   if (person) {
@@ -39,7 +39,7 @@ router.route('/:id').put(async (req, res) => {
   const { body } = req;
   const { name, number } = body;
   if (!name || !number) {
-    return res.status(400).json({ error: 'content missing' });
+    return res.status(400).send({ error: 'content missing' });
   }
   const person = await personsService.editUser(body);
   if (person) {
