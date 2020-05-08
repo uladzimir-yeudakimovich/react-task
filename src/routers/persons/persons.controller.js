@@ -13,8 +13,15 @@ const addUser = async user => {
   return newPerson;
 };
 
+const updateUser = async user => {
+  const index = persons.findIndex(el => el.name === user.name);
+  if (index < 0) return;
+  persons[index].number = user.number;
+  return persons[index];
+};
+
 const deleteUser = async id => {
   persons = persons.filter(el => el.id !== id);
 };
 
-module.exports = { getAll, getUser, addUser, deleteUser };
+module.exports = { getAll, getUser, addUser, updateUser, deleteUser };

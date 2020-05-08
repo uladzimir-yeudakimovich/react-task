@@ -35,6 +35,23 @@ router.route('/').post(async (req, res) => {
   }
 });
 
+router.route('/:id').put(async (req, res) => {
+  const { body } = req;
+  const { name, number } = body;
+  if (!name || !number) {
+    return res.status(400).json({ error: 'content missing' });
+  }
+  const person = await personsService.editUser(body);
+  if (person) {
+    res.json(User.toResponse(person));
+  } else {
+    res
+      .status(409)
+      .send({ error: 'name must be unique' })
+      .end();
+  }
+});
+
 router.route('/:id').delete(async (req, res) => {
   const id = Number(req.params.id);
   await personsService.deleteUser(id);
