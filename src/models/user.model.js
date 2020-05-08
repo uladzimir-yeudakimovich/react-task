@@ -1,17 +1,22 @@
+const { Schema, model } = require('mongoose');
+
 const generateId = () => Math.floor(Math.random() * 1e10);
 
-class User {
-  constructor({ id = generateId(), name, number } = {}) {
-    this.id = id;
-    this.name = name;
-    this.number = number;
-    this.date = new Date();
-  }
+const userSchema = new Schema(
+  {
+    _id: { type: Number, default: generateId() },
+    name: { type: String, required: true, trim: true, unique: true },
+    number: { type: String, required: true, trim: true },
+    date: { type: Date, default: new Date() }
+  },
+  { versionKey: false }
+);
 
-  static toResponse(user) {
-    const { id, name, number } = user;
-    return { id, name, number };
-  }
-}
+userSchema.statics.toResponse = user => {
+  const { id, name, number } = user;
+  return { id, name, number };
+};
+
+const User = model('User', userSchema);
 
 module.exports = User;

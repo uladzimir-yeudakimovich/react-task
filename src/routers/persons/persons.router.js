@@ -36,12 +36,13 @@ router.route('/').post(async (req, res) => {
 });
 
 router.route('/:id').put(async (req, res) => {
+  const id = Number(req.params.id);
   const { body } = req;
   const { name, number } = body;
   if (!name || !number) {
     return res.status(400).send({ error: 'content missing' });
   }
-  const person = await personsService.editUser(body);
+  const person = await personsService.editUser(id, body);
   if (person) {
     res.json(User.toResponse(person));
   } else {
