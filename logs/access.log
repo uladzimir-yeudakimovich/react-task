@@ -1,0 +1,45 @@
+{
+  url: '/api/persons/9937828842', method: 'POST', status: 404, time: 5.119 ms,
+  body: {"name":"admin","number":"888-555-000"}, params: {},
+  timestamp: Fri, 08 May 2020 23:24:38 GMT
+}
+{
+  url: '/api/persons', method: 'POST', status: 200, time: 155.870 ms,
+  body: {"name":"admin","number":"888-555-000"}, params: {},
+  timestamp: Fri, 08 May 2020 23:25:02 GMT
+}
+{
+  url: '/api/persons/2067301093', method: 'PUT', status: 200, time: 180.167 ms,
+  body: {"name":"admin","number":"888-555-890"}, params: {"id":"2067301093"},
+  timestamp: Fri, 08 May 2020 23:25:29 GMT
+}
+{
+  url: '/api/persons/20673010939', method: 'PUT', status: 409, time: 163.584 ms,
+  body: {"name":"admin","number":"888-555-890"}, params: {"id":"20673010939"},
+  timestamp: Fri, 08 May 2020 23:25:36 GMT
+}
+{
+  url: '/api/persons/2067301093', method: 'PUT', status: 200, time: 153.622 ms,
+  body: {"name":"admin","number":"888-555-890"}, params: {"id":"2067301093"},
+  timestamp: Fri, 08 May 2020 23:26:07 GMT
+}
+{
+  url: '/api/persons/2067301093', method: 'DELETE', status: 204, time: 110.121 ms,
+  body: {"name":"admin","number":"888-555-890"}, params: {"id":"2067301093"},
+  timestamp: Fri, 08 May 2020 23:26:15 GMT
+}
+{
+  url: '/api/persons/2067301093', method: 'DELETE', status: 204, time: 50.644 ms,
+  body: {"name":"admin","number":"888-555-890"}, params: {"id":"2067301093"},
+  timestamp: Fri, 08 May 2020 23:26:24 GMT
+}
+{
+  url: '/api/persons/2067301093', method: 'GET', status: 404, time: 55.921 ms,
+  body: {"name":"admin","number":"888-555-890"}, params: {"id":"2067301093"},
+  timestamp: Fri, 08 May 2020 23:26:38 GMT
+}
+{
+  url: '/api/persons/', method: 'GET', status: 200, time: 59.078 ms,
+  body: {"name":"admin","number":"888-555-890"}, params: {},
+  timestamp: Fri, 08 May 2020 23:26:45 GMT
+}
