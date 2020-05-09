@@ -1,0 +1,5 @@
+{
+  url: '/api/persons/', method: 'GET', status: 200, time: 124.000 ms,
+  body: {"name":"admin","number":"888-555-890"}, params: {},
+  timestamp: Sat, 09 May 2020 08:43:58 GMT
+}
