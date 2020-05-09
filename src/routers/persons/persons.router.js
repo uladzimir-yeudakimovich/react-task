@@ -1,24 +1,24 @@
 const router = require('express').Router();
 
 const personsService = require('./persons.service');
-const User = require('../../models/user.model');
+const Person = require('../../models/person.model');
 
 router.route('/').get(async (req, res, next) => {
   await personsService
     .getAll()
     .then(result => {
-      res.json(result.map(User.toResponse));
+      res.json(result.map(Person.toResponse));
     })
     .catch(error => next(error));
 });
 
 router.route('/:id').get(async (req, res, next) => {
-  const id = Number(req.params.id);
+  const { id } = req.params;
   await personsService
-    .getUser(id)
+    .getPerson(id)
     .then(result => {
       if (result) {
-        res.json(User.toResponse(result));
+        res.json(Person.toResponse(result));
       } else {
         res.status(404).end();
       }
@@ -29,39 +29,28 @@ router.route('/:id').get(async (req, res, next) => {
 router.route('/').post(async (req, res, next) => {
   const { body } = req;
   await personsService
-    .addUser(body)
+    .addPerson(body)
     .then(result => {
-      res.json(User.toResponse(result));
+      res.json(Person.toResponse(result));
     })
     .catch(error => next(error));
 });
 
 router.route('/:id').put(async (req, res, next) => {
-  const id = Number(req.params.id);
+  const { id } = req.params;
   const { body } = req;
-  const { name, number } = body;
-  if (!name || !number) {
-    return res.status(400).send({ error: 'content missing' });
-  }
   await personsService
-    .editUser(id, body)
+    .editPerson(id, body)
     .then(result => {
-      if (result) {
-        res.json(User.toResponse(result));
-      } else {
-        res
-          .status(409)
-          .send({ error: 'name must be unique' })
-          .end();
-      }
+      res.json(Person.toResponse(result));
     })
     .catch(error => next(error));
 });
 
 router.route('/:id').delete(async (req, res, next) => {
-  const id = Number(req.params.id);
+  const { id } = req.params;
   await personsService
-    .deleteUser(id)
+    .deletePerson(id)
     .then(() => {
       res.status(204).end();
     })

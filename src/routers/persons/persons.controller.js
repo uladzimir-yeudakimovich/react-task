@@ -1,27 +1,19 @@
-const User = require('../../models/user.model');
+const Person = require('../../models/person.model');
 
-const getAll = async () => User.find({});
+const getAll = async () => Person.find({});
 
-const getUser = async id => User.findById(id);
+const getPerson = async id => Person.findById(id);
 
-const addUser = async user => User.create(user);
+const addPerson = async person => Person.create(person);
 
-const updateUser = async (id, user) => {
-  const findUserById = User.find({ _id: id });
-  if (!(await findUserById).length) return;
-  const findUserByIdAndName = User.find({ _id: id, name: user.name });
-  const findUserByName = User.find({ name: user.name });
-  if (!(await findUserByIdAndName).length && (await findUserByName).length) {
-    return;
-  }
-  await User.findByIdAndUpdate(id, user);
-  return User.find({ _id: id });
+const updatePerson = async (id, person) => {
+  await Person.findByIdAndUpdate(id, person, {
+    runValidators: true,
+    context: 'query'
+  });
+  return Person.findById(id);
 };
 
-const deleteUser = async id => {
-  const userForDelete = User.find({ _id: id });
-  if (!(await userForDelete).length) return;
-  await User.findByIdAndDelete(id);
-};
+const deletePerson = async id => Person.findByIdAndDelete(id);
 
-module.exports = { getAll, getUser, addUser, updateUser, deleteUser };
+module.exports = { getAll, getPerson, addPerson, updatePerson, deletePerson };

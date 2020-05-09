@@ -1,9 +1,9 @@
-const usersRepo = require('./persons.controller');
+const personsRepo = require('./persons.controller');
 
-const getAll = () => usersRepo.getAll();
-const getUser = id => usersRepo.getUser(id);
-const addUser = user => usersRepo.addUser(user);
-const editUser = (id, user) => usersRepo.updateUser(id, user);
-const deleteUser = id => usersRepo.deleteUser(id);
+const getAll = () => personsRepo.getAll();
+const getPerson = id => personsRepo.getPerson(id);
+const addPerson = person => personsRepo.addPerson(person);
+const editPerson = (id, person) => personsRepo.updatePerson(id, person);
+const deletePerson = id => personsRepo.deletePerson(id);
 
-module.exports = { getAll, getUser, addUser, editUser, deleteUser };
+module.exports = { getAll, getPerson, addPerson, editPerson, deletePerson };
