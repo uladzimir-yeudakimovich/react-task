@@ -28,21 +28,10 @@ router.route('/:id').get(async (req, res, next) => {
 
 router.route('/').post(async (req, res, next) => {
   const { body } = req;
-  const { name, number } = body;
-  if (!name || !number) {
-    return res.status(400).send({ error: 'content missing' });
-  }
   await personsService
     .addUser(body)
     .then(result => {
-      if (result) {
-        res.json(User.toResponse(result));
-      } else {
-        res
-          .status(409)
-          .send({ error: 'name must be unique' })
-          .end();
-      }
+      res.json(User.toResponse(result));
     })
     .catch(error => next(error));
 });

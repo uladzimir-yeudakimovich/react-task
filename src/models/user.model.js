@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const generateId = () => Math.floor(Math.random() * 1e10);
 
@@ -16,6 +17,8 @@ userSchema.statics.toResponse = user => {
   const { id, name, number } = user;
   return { id, name, number };
 };
+
+userSchema.plugin(uniqueValidator);
 
 const User = model('User', userSchema);
 
