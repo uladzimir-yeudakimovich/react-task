@@ -1,15 +1,35 @@
 {
-  url: '/api/blogs/', method: 'GET', status: 200, time: 74.991 ms,
-  body: {"name":"Node.js","parts":[{"name":"Routing","exercises":3},{"name":"Middlewares","exercises":7}]}, params: {},
-  timestamp: Sun, 10 May 2020 20:45:28 GMT
+  url: '/api/blogs/', method: 'POST', status: 200, time: 445.959 ms,
+  body: {"title":"React patterns","author":"Michael Chan","url":"https://reactpatterns.com/","likes":7}, params: {},
+  timestamp: Mon, 11 May 2020 09:25:32 GMT
 }
 {
-  url: '/api/blogs/', method: 'POST', status: 200, time: 108.005 ms,
-  body: {"title":"Node.js","author":"jdhsjkfhdjk"}, params: {},
-  timestamp: Sun, 10 May 2020 20:49:27 GMT
+  url: '/api/blogs/', method: 'POST', status: 200, time: 55.967 ms,
+  body: {"title":"Go To Statement Considered Harmful","author":"Edsger W. Dijkstra","url":"http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html","likes":5}, params: {},
+  timestamp: Mon, 11 May 2020 09:27:16 GMT
 }
 {
-  url: '/api/blogs/', method: 'POST', status: 200, time: 63.948 ms,
-  body: {"title":"Node.js","author":"jdhsjkfhdjk","url":"hjkgryuioj","likes":89}, params: {},
-  timestamp: Sun, 10 May 2020 20:51:20 GMT
+  url: '/api/blogs/', method: 'POST', status: 200, time: 59.826 ms,
+  body: {"title":"Canonical string reduction","author":"Edsger W. Dijkstra","url":"http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html","likes":12}, params: {},
+  timestamp: Mon, 11 May 2020 09:28:45 GMT
+}
+{
+  url: '/api/blogs/', method: 'POST', status: 200, time: 61.046 ms,
+  body: {"title":"First class tests","author":"Robert C. Martin","url":"http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll","likes":10}, params: {},
+  timestamp: Mon, 11 May 2020 09:29:46 GMT
+}
+{
+  url: '/api/blogs/', method: 'POST', status: 200, time: 52.630 ms,
+  body: {"title":"TDD harms architecture","author":"Robert C. Martin","url":"http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html","likes":0}, params: {},
+  timestamp: Mon, 11 May 2020 09:30:46 GMT
+}
+{
+  url: '/api/blogs/', method: 'POST', status: 200, time: 57.185 ms,
+  body: {"title":"Type wars","author":"Robert C. Martin","url":"http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html","likes":2}, params: {},
+  timestamp: Mon, 11 May 2020 09:31:39 GMT
+}
+{
+  url: '/api/blogs/', method: 'GET', status: 200, time: 434.305 ms,
+  body: {"title":"Type wars","author":"Robert C. Martin","url":"http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html","likes":2}, params: {},
+  timestamp: Mon, 11 May 2020 09:44:03 GMT
 }
