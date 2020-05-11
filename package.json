@@ -4,10 +4,10 @@
   "description": "fullstack-app-back-end",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "start": "cross-env NODE_ENV=production node src/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js",
     "lint": "eslint ./ --ignore-path .gitignore --fix",
-    "test": "jest --verbose"
+    "test": "jest --verbose --runInBand"
   },
   "author": "Uladzimir Yeudakimovich",
   "license": "MIT",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "cross-env": "6.0.3",
+    "cross-env": "^6.0.3",
     "dotenv": "8.2.0",
     "express": "4.17.1",
     "mongoose": "^5.9.13",
@@ -45,6 +45,7 @@
     "jest": "^26.0.1",
     "lint-staged": "9.5.0",
     "nodemon": "2.0.2",
-    "prettier": "1.19.1"
+    "prettier": "1.19.1",
+    "supertest": "^4.0.2"
   }
 }

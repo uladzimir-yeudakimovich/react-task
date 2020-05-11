@@ -5,9 +5,12 @@ config({
   path: path.join(__dirname, '../../.env')
 });
 
+const MONGODB_URI =
+  process.env.NODE_ENV === 'development'
+    ? process.env.TEST_MONGODB_URI
+    : process.env.MONGODB_URI;
+
 module.exports = {
-  NODE_ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
-  JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
-  MONGO_CONNECTION_STRING: process.env.MONGO_CONNECTION_STRING
+  MONGODB_URI
 };

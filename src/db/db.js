@@ -1,9 +1,9 @@
 const { connect, connection } = require('mongoose');
 
-const { MONGO_CONNECTION_STRING } = require('../common/config');
+const { MONGODB_URI } = require('../common/config');
 
 const connectToDb = callback => {
-  connect(MONGO_CONNECTION_STRING, {
+  connect(MONGODB_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
