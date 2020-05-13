@@ -1,4 +1,11 @@
 module.exports = {
+  anecdotes: {
+    getAll: '/api/anecdotes',
+    getById: id => `/api/anecdotes/${id}`,
+    create: '/api/anecdotes',
+    update: id => `/api/anecdotes/${id}`,
+    delete: id => `/api/anecdotes/${id}`
+  },
   blogs: {
     getAll: '/api/blogs',
     getById: id => `/api/blogs/${id}`,

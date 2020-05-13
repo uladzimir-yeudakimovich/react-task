@@ -1,4 +1,4 @@
-# Back-end for courses, phonebook and blogs
+# Back-end for anecdotes, blogs, courses and phonebook
 
 ## Available Scripts
 
