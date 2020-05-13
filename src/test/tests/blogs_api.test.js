@@ -1,11 +1,13 @@
 const { request, routes } = require('../lib');
 
 const TEST_BLOG_DATA = {
-  title: 'test',
-  author: 'test',
-  url: 'http://blog.test.com/',
-  likes: 1
+  title: 'Autotest blog',
+  author: 'Uladzimir Yeudakimovich',
+  url: 'https://uladzimir-yeudakimovich.github.io/',
+  likes: 100
 };
+
+let blogId;
 
 test('should get all blogs', async () => {
   await request
@@ -22,11 +24,11 @@ test('should create blog successfully', async () => {
     .expect(200)
     .expect('Content-Type', /json/)
     .then(res => {
-      expect(res.body).toMatchObject({
-        title: TEST_BLOG_DATA.title,
-        author: TEST_BLOG_DATA.author,
-        url: TEST_BLOG_DATA.url,
-        likes: TEST_BLOG_DATA.likes
-      });
+      blogId = res.body.id;
+      expect(res.body).toMatchObject(TEST_BLOG_DATA);
     });
+});
+
+test('should delete blogs successfully', async () => {
+  await request.delete(routes.blogs.delete(blogId)).then(() => expect(204));
 });

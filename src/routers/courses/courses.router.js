@@ -22,4 +22,14 @@ router.route('/').post(async (req, res, next) => {
     .catch(error => next(error));
 });
 
+router.route('/:id').delete(async (req, res, next) => {
+  const { id } = req.params;
+  await coursesService
+    .deleteCourse(id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch(error => next(error));
+});
+
 module.exports = router;
