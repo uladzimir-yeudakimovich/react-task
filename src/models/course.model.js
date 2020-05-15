@@ -1,5 +1,6 @@
 const uuid = require('uuid');
 const { Schema, model } = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const courseSchema = new Schema(
   {
@@ -11,9 +12,14 @@ const courseSchema = new Schema(
       trim: true,
       unique: true
     },
-    postedBy: { type: Schema.Types.ObjectId, ref: 'Part' },
     parts: {
-      type: [{ name: String, exercises: Number, by: Schema.Types.ObjectId }],
+      type: [
+        {
+          _id: { type: String, default: uuid },
+          name: String,
+          exercises: Number
+        }
+      ],
       required: true
     }
   },
@@ -24,6 +30,8 @@ courseSchema.statics.toResponse = course => {
   const { id, name, parts } = course;
   return { id, name, parts };
 };
+
+courseSchema.plugin(uniqueValidator);
 
 const Course = model('Course', courseSchema);
 
