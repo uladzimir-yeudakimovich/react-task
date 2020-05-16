@@ -21,6 +21,7 @@ module.exports = {
     delete: id => `/api/courses/${id}`
   },
   info: '/info',
+  login: '/login',
   persons: {
     getAll: '/api/persons',
     getById: id => `/api/persons/${id}`,
