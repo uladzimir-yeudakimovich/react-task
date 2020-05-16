@@ -9,8 +9,14 @@ const userSchema = new Schema(
   {
     _id: { type: String, default: uuid },
     name: { type: String, trim: true },
-    login: { type: String, required: true, trim: true, unique: true },
-    password: { type: String, required: true }
+    login: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
+      minlength: 6
+    },
+    password: { type: String, required: true, minlength: 6 }
   },
   { versionKey: false }
 );
