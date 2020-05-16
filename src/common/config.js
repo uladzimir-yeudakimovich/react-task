@@ -12,5 +12,6 @@ const MONGODB_URI =
 
 module.exports = {
   PORT: process.env.PORT,
-  MONGODB_URI
+  MONGODB_URI,
+  JWT_SECRET_KEY: process.env.JWT_SECRET_KEY
 };
