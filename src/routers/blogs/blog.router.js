@@ -14,8 +14,9 @@ router.route('/').get(async (req, res, next) => {
 
 router.route('/').post(async (req, res, next) => {
   const { body } = req;
+  const { id } = req.decoded;
   await blogService
-    .addBlog(body)
+    .addBlog(body, id)
     .then(result => {
       res.json(Blog.toResponse(result));
     })

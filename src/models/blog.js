@@ -6,6 +6,11 @@ const blogSchema = new Schema(
     _id: { type: String, default: uuid },
     title: String,
     author: String,
+    user: {
+      id: String,
+      login: String,
+      name: String
+    },
     url: String,
     likes: Number
   },
@@ -13,8 +18,8 @@ const blogSchema = new Schema(
 );
 
 blogSchema.statics.toResponse = blog => {
-  const { id, title, author, url, likes } = blog;
-  return { id, title, author, url, likes };
+  const { id, title, author, user, url, likes } = blog;
+  return { id, title, author, user, url, likes };
 };
 
 const Blog = model('Blog', blogSchema);

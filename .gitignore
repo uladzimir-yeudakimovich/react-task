@@ -1,3 +1,4 @@
 node_modules
-logs
+logs/access.log
+logs/error.log
 .env

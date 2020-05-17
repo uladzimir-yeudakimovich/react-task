@@ -29,7 +29,7 @@ app.use('/', (req, res, next) => {
 app.use('/info', infoRouter);
 app.use('/login', loginRouter);
 app.use('/api/anecdotes', anecdotesRouter);
-app.use('/api/blogs', blogsRouter);
+app.use('/api/blogs', checkToken, blogsRouter);
 app.use('/api/courses', coursesRouter);
 app.use('/api/persons', personsRouter);
 app.use('/api/users', checkToken, usersRouter);
