@@ -7,8 +7,8 @@ const blogSchema = new Schema(
     title: { type: String, required: true },
     author: { type: String, required: true },
     user: {
-      id: String,
-      login: String,
+      id: { type: String, required: true },
+      login: { type: String, required: true },
       name: String
     },
     url: { type: String, required: true },
