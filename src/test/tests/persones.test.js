@@ -20,99 +20,113 @@ describe('Persones suite', () => {
       .expect('Content-Type', /application\/json/);
   });
 
-  test('should create a valid person successfully', async () => {
-    await request
-      .post(routes.persons.create)
-      .set('Accept', 'application/json')
-      .send(TEST_PERSONES_DATA)
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        personeId = res.body.id;
-        expect(res.body.date).toBeUndefined();
-        expect(res.body).toMatchObject({
-          name: TEST_PERSONES_DATA.name,
-          number: TEST_PERSONES_DATA.number
+  describe('should create a valid person successfully', () => {
+    it('should get 200 and create new persone ', async () => {
+      await request
+        .post(routes.persons.create)
+        .set('Accept', 'application/json')
+        .send(TEST_PERSONES_DATA)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          personeId = res.body.id;
+          expect(res.body.date).toBeUndefined();
+          expect(res.body).toMatchObject({
+            name: TEST_PERSONES_DATA.name,
+            number: TEST_PERSONES_DATA.number
+          });
         });
-      });
+    });
 
-    await request
-      .post(routes.persons.create)
-      .set('Accept', 'application/json')
-      .send(TEST_PERSONES_DATA)
-      .expect(400)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body.error).toContain(
-          'Person validation failed: name: Error, expected `name` to be unique. Value:'
-        );
-      });
+    it('should get 400 and validation failed name ', async () => {
+      await request
+        .post(routes.persons.create)
+        .set('Accept', 'application/json')
+        .send(TEST_PERSONES_DATA)
+        .expect(400)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.error).toContain(
+            'Person validation failed: name: Error, expected `name` to be unique. Value:'
+          );
+        });
+    });
 
-    await request
-      .post(routes.persons.create)
-      .set('Accept', 'application/json')
-      .send({})
-      .expect(400)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body.error).toContain(
-          'Person validation failed: number: Path `number` is required., name: Path `name` is required.'
-        );
-      });
+    it('should get 400 and validation failed number ', async () => {
+      await request
+        .post(routes.persons.create)
+        .set('Accept', 'application/json')
+        .send({})
+        .expect(400)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.error).toContain(
+            'Person validation failed: number: Path `number` is required., name: Path `name` is required.'
+          );
+        });
+    });
 
-    await request
-      .post(routes.persons.create)
-      .set('Accept', 'application/json')
-      .send({ name: 'TEST' })
-      .expect(400)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body.error).toContain(
-          'Person validation failed: number: Path `number` is required.'
-        );
-      });
+    it('should get 400 and validation failed number ', async () => {
+      await request
+        .post(routes.persons.create)
+        .set('Accept', 'application/json')
+        .send({ name: 'TEST' })
+        .expect(400)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.error).toContain(
+            'Person validation failed: number: Path `number` is required.'
+          );
+        });
+    });
 
-    await request
-      .post(routes.persons.create)
-      .set('Accept', 'application/json')
-      .send({ number: '123-456-789' })
-      .expect(400)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body.error).toContain(
-          'Person validation failed: name: Path `name` is required.'
-        );
-      });
+    it('should get 400 and validation failed name ', async () => {
+      await request
+        .post(routes.persons.create)
+        .set('Accept', 'application/json')
+        .send({ number: '123-456-789' })
+        .expect(400)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.error).toContain(
+            'Person validation failed: name: Path `name` is required.'
+          );
+        });
+    });
 
-    await request
-      .post(routes.persons.create)
-      .set('Accept', 'application/json')
-      .send({
-        name: 'TE',
-        number: '123-456-789'
-      })
-      .expect(400)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body.error).toContain(
-          'Person validation failed: name: Path `name`'
-        );
-      });
+    it('should get 400 and validation failed name length ', async () => {
+      await request
+        .post(routes.persons.create)
+        .set('Accept', 'application/json')
+        .send({
+          name: 'TE',
+          number: '123-456-789'
+        })
+        .expect(400)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.error).toContain(
+            'Person validation failed: name: Path `name`'
+          );
+        });
+    });
 
-    await request
-      .post(routes.persons.create)
-      .set('Accept', 'application/json')
-      .send({
-        name: 'TEST',
-        number: '123-456'
-      })
-      .expect(400)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body.error).toContain(
-          'Person validation failed: number: Path `number'
-        );
-      });
+    it('should get 400 and validation failed number length ', async () => {
+      await request
+        .post(routes.persons.create)
+        .set('Accept', 'application/json')
+        .send({
+          name: 'TEST',
+          number: '123-456'
+        })
+        .expect(400)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.error).toContain(
+            'Person validation failed: number: Path `number'
+          );
+        });
+    });
   });
 
   test('should get a person by id', async () => {
@@ -129,79 +143,93 @@ describe('Persones suite', () => {
       });
   });
 
-  test('should update person successfully', async () => {
+  describe('should update person successfully', () => {
     let secondPersoneId;
 
-    await request
-      .put(routes.persons.update(personeId))
-      .set('Accept', 'application/json')
-      .send(TEST_PERSONES_DATA)
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body).toMatchObject({
-          name: TEST_PERSONES_DATA.name,
-          number: TEST_PERSONES_DATA.number
+    it('should get 200 ', async () => {
+      await request
+        .put(routes.persons.update(personeId))
+        .set('Accept', 'application/json')
+        .send(TEST_PERSONES_DATA)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body).toMatchObject({
+            name: TEST_PERSONES_DATA.name,
+            number: TEST_PERSONES_DATA.number
+          });
         });
-      });
+    });
 
-    await request
-      .put(routes.persons.update(personeId))
-      .set('Accept', 'application/json')
-      .send(UPDATE_PERSONES_DATA)
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body).toMatchObject({
-          name: UPDATE_PERSONES_DATA.name,
-          number: UPDATE_PERSONES_DATA.number
+    it('should get 200 and update persone data ', async () => {
+      await request
+        .put(routes.persons.update(personeId))
+        .set('Accept', 'application/json')
+        .send(UPDATE_PERSONES_DATA)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body).toMatchObject({
+            name: UPDATE_PERSONES_DATA.name,
+            number: UPDATE_PERSONES_DATA.number
+          });
         });
-      });
+    });
 
-    await request
-      .get(routes.persons.getById(personeId))
-      .set('Accept', 'application/json')
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body).toMatchObject({
-          name: UPDATE_PERSONES_DATA.name,
-          number: UPDATE_PERSONES_DATA.number
+    it('should get 200 and get persone with new data ', async () => {
+      await request
+        .get(routes.persons.getById(personeId))
+        .set('Accept', 'application/json')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body).toMatchObject({
+            name: UPDATE_PERSONES_DATA.name,
+            number: UPDATE_PERSONES_DATA.number
+          });
         });
-      });
+    });
 
-    await request
-      .post(routes.persons.create)
-      .set('Accept', 'application/json')
-      .send(TEST_PERSONES_DATA)
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        secondPersoneId = res.body.id;
-        expect(res.body.date).toBeUndefined();
-        expect(res.body).toMatchObject({
-          name: TEST_PERSONES_DATA.name,
-          number: TEST_PERSONES_DATA.number
+    it('should get 200 and create new persone ', async () => {
+      await request
+        .post(routes.persons.create)
+        .set('Accept', 'application/json')
+        .send(TEST_PERSONES_DATA)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          secondPersoneId = res.body.id;
+          expect(res.body.date).toBeUndefined();
+          expect(res.body).toMatchObject({
+            name: TEST_PERSONES_DATA.name,
+            number: TEST_PERSONES_DATA.number
+          });
         });
-      });
+    });
 
-    await request
-      .put(routes.persons.update(secondPersoneId))
-      .set('Accept', 'application/json')
-      .send(UPDATE_PERSONES_DATA)
-      .expect(400)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        expect(res.body.error).toContain(
-          'Validation failed: name: Error, expected `name` to be unique. Value:'
-        );
-      });
+    it('should get 400 and det validation error ', async () => {
+      await request
+        .put(routes.persons.update(secondPersoneId))
+        .set('Accept', 'application/json')
+        .send(UPDATE_PERSONES_DATA)
+        .expect(400)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.error).toContain(
+            'Validation failed: name: Error, expected `name` to be unique. Value:'
+          );
+        });
+    });
 
-    await request
-      .delete(routes.persons.delete(secondPersoneId))
-      .then(() => expect(204));
+    it('should get 204 and delete second persone ', async () => {
+      await request
+        .delete(routes.persons.delete(secondPersoneId))
+        .then(() => expect(204));
+    });
 
-    await request.get(routes.persons.getById(secondPersoneId)).expect(404);
+    it('should get 404 becouse persone has been deleted ', async () => {
+      await request.get(routes.persons.getById(secondPersoneId)).expect(404);
+    });
   });
 
   test('should delete person successfully', async () => {

@@ -1,4 +1,5 @@
-const { request, routes } = require('../lib');
+const { request: unAuthReq, routes } = require('../lib');
+const authReq = require('../utils/auth-req');
 
 const TEST_BLOG_DATA = {
   title: 'Autotest blog',
@@ -7,28 +8,35 @@ const TEST_BLOG_DATA = {
   likes: 100
 };
 
-let blogId;
+describe('Blogs suite auth', () => {
+  let request = unAuthReq;
+  let blogId;
 
-test('should get all blogs', async () => {
-  await request
-    .get(routes.blogs.getAll)
-    .expect(200)
-    .expect('Content-Type', /application\/json/);
-});
+  beforeAll(async () => {
+    request = await authReq(unAuthReq);
+  });
 
-test('should create blog successfully', async () => {
-  await request
-    .post(routes.blogs.create)
-    .set('Accept', 'application/json')
-    .send(TEST_BLOG_DATA)
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .then(res => {
-      blogId = res.body.id;
-      expect(res.body).toMatchObject(TEST_BLOG_DATA);
-    });
-});
+  test('should get all blogs', async () => {
+    await request
+      .get(routes.blogs.getAll)
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+  });
 
-test('should delete blogs successfully', async () => {
-  await request.delete(routes.blogs.delete(blogId)).then(() => expect(204));
+  test('should create blog successfully', async () => {
+    await request
+      .post(routes.blogs.create)
+      .set('Accept', 'application/json')
+      .send(TEST_BLOG_DATA)
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .then(res => {
+        blogId = res.body.id;
+        expect(res.body).toMatchObject(TEST_BLOG_DATA);
+      });
+  });
+
+  test('should delete blogs successfully', async () => {
+    await request.delete(routes.blogs.delete(blogId)).then(() => expect(204));
+  });
 });

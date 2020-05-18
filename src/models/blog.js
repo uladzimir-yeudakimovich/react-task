@@ -4,15 +4,15 @@ const { Schema, model } = require('mongoose');
 const blogSchema = new Schema(
   {
     _id: { type: String, default: uuid },
-    title: String,
-    author: String,
+    title: { type: String, required: true },
+    author: { type: String, required: true },
     user: {
       id: String,
       login: String,
       name: String
     },
-    url: String,
-    likes: Number
+    url: { type: String, required: true },
+    likes: { type: Number, required: true }
   },
   { versionKey: false }
 );
