@@ -24,11 +24,15 @@ router.route('/').post(async (req, res, next) => {
 });
 
 router.route('/:id').delete(async (req, res, next) => {
-  const { id } = req.params;
+  const { id: blogId } = req.params;
+  const { id: userId } = req.decoded;
   await blogService
-    .deleteBlog(id)
-    .then(() => {
-      res.status(204).end();
+    .deleteBlog(blogId, userId)
+    .then(result => {
+      if (result) {
+        return res.status(204).end();
+      }
+      res.status(412).json({ error: 'Precondition Failed' });
     })
     .catch(error => next(error));
 });

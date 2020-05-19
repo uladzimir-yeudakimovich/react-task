@@ -18,6 +18,17 @@ const addBlog = async (blog, id) => {
   return newBlog;
 };
 
-const deleteBlog = id => blogRepo.deleteBlog(id);
+const deleteBlog = async (blogId, userId) => {
+  const findUser = await User.findById(userId);
+  const user = User.toResponse(findUser);
+  const checkUserBlog = await user.blogs.find(el => el.id === blogId);
+  if (checkUserBlog) {
+    const updateUserBlogs = await user.blogs.filter(el => el.id !== blogId);
+    user.blogs = updateUserBlogs;
+    usersService.editUser(userId, user);
+    return blogRepo.deleteBlog(blogId);
+  }
+  return;
+};
 
 module.exports = { getAll, addBlog, deleteBlog };

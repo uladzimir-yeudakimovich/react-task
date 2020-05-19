@@ -11,6 +11,7 @@ const TEST_BLOG_DATA = {
 describe('Blogs suite auth', () => {
   let request = unAuthReq;
   let blogId;
+  let userId;
 
   beforeAll(async () => {
     request = await authReq(unAuthReq);
@@ -23,20 +24,58 @@ describe('Blogs suite auth', () => {
       .expect('Content-Type', /application\/json/);
   });
 
-  test('should create blog successfully', async () => {
-    await request
-      .post(routes.blogs.create)
-      .set('Accept', 'application/json')
-      .send(TEST_BLOG_DATA)
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .then(res => {
-        blogId = res.body.id;
-        expect(res.body).toMatchObject(TEST_BLOG_DATA);
-      });
+  describe('should create blog successfully', () => {
+    it('should get 200 and create new blog ', async () => {
+      await request
+        .post(routes.blogs.create)
+        .set('Accept', 'application/json')
+        .send(TEST_BLOG_DATA)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          blogId = res.body.id;
+          userId = res.body.user.id;
+          expect(res.body.user.login).toContain('admin');
+          expect(res.body).toMatchObject(TEST_BLOG_DATA);
+        });
+    });
+
+    it('should get a user by id with test blog in blogs', async () => {
+      await request
+        .get(routes.users.getById(userId))
+        .set('Accept', 'application/json')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.password).toBeUndefined();
+          expect(res.body.login).toContain('admin');
+          // console.log(res.body);
+          // expect(res.body.blogs[0]).toMatchObject({
+          //   title: TEST_BLOG_DATA.title,
+          //   author: TEST_BLOG_DATA.author,
+          //   url: TEST_BLOG_DATA.url,
+          //   likes: TEST_BLOG_DATA.likes.toString()
+          // });
+        });
+    });
   });
 
-  test('should delete blogs successfully', async () => {
-    await request.delete(routes.blogs.delete(blogId)).then(() => expect(204));
+  describe('should delete blogs successfully', () => {
+    it('should delete blog', async () => {
+      await request.delete(routes.blogs.delete(blogId)).then(() => expect(204));
+    });
+
+    it('should get a user by id without blog in blogs', async () => {
+      await request
+        .get(routes.users.getById(userId))
+        .set('Accept', 'application/json')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .then(res => {
+          expect(res.body.password).toBeUndefined();
+          expect(res.body.login).toContain('admin');
+          expect(res.body.blogs).toHaveLength(0);
+        });
+    });
   });
 });

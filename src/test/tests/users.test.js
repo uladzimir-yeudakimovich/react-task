@@ -125,7 +125,7 @@ describe('Users suite', () => {
         .set('Accept', 'application/json')
         .send({
           login: 'NEW_TEST_LOGIN',
-          password: '12300'
+          password: '1230'
         })
         .expect(400)
         .expect('Content-Type', /json/)

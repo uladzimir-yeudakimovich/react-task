@@ -14,9 +14,9 @@ const userSchema = new Schema(
       required: true,
       trim: true,
       unique: true,
-      minlength: 6
+      minlength: 5
     },
-    password: { type: String, required: true, minlength: 6 },
+    password: { type: String, required: true, minlength: 5 },
     blogs: [
       {
         _id: { type: String, required: true },
