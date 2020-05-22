@@ -23,7 +23,7 @@ const userSchema = new Schema(
         title: { type: String, required: true },
         author: { type: String, required: true },
         url: { type: String, required: true },
-        likes: Number
+        likes: { type: Number, required: true }
       }
     ]
   },
