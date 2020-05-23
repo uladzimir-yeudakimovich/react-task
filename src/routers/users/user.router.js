@@ -42,7 +42,11 @@ router.route('/:id').put(async (req, res, next) => {
   await usersService
     .editUser(id, body)
     .then(result => {
-      res.json(User.toResponse(result));
+      if (result) {
+        res.json(User.toResponse(result));
+      } else {
+        res.status(404).end();
+      }
     })
     .catch(error => next(error));
 });

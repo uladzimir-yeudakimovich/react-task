@@ -23,6 +23,21 @@ router.route('/').post(async (req, res, next) => {
     .catch(error => next(error));
 });
 
+router.route('/:id').put(async (req, res, next) => {
+  const { id } = req.params;
+  const { body } = req;
+  await blogService
+    .editBlog(id, body)
+    .then(result => {
+      if (result) {
+        res.json(Blog.toResponse(result));
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch(error => next(error));
+});
+
 router.route('/:id').delete(async (req, res, next) => {
   const { id: blogId } = req.params;
   const { id: userId } = req.decoded;

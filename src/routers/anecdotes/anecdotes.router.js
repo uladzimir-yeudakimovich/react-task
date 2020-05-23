@@ -42,7 +42,11 @@ router.route('/:id').put(async (req, res, next) => {
   await anecdoteService
     .editAnecdote(id, body)
     .then(result => {
-      res.json(Anecdote.toResponse(result));
+      if (result) {
+        res.json(Anecdote.toResponse(result));
+      } else {
+        res.status(404).end();
+      }
     })
     .catch(error => next(error));
 });

@@ -18,6 +18,17 @@ const addBlog = async (blog, id) => {
   return newBlog;
 };
 
+const editBlog = async (blogId, blog) => {
+  const userId = blog.user.id;
+  const findUser = await usersService.getUser(userId);
+  const user = User.toResponse(findUser);
+  const index = user.blogs.findIndex(el => el.id === blogId);
+  const { id, title, author, url, likes } = blog;
+  user.blogs[index] = { _id: id, title, author, url, likes };
+  usersService.editUser(userId, user);
+  return blogRepo.updateBlog(blogId, blog);
+};
+
 const deleteBlog = async (blogId, userId) => {
   const findUser = await User.findById(userId);
   const user = User.toResponse(findUser);
@@ -31,4 +42,4 @@ const deleteBlog = async (blogId, userId) => {
   return;
 };
 
-module.exports = { getAll, addBlog, deleteBlog };
+module.exports = { getAll, addBlog, editBlog, deleteBlog };
