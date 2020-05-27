@@ -6,8 +6,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/server.js",
     "dev": "cross-env NODE_ENV=development nodemon src/server.js",
-    "lint": "eslint ./ --ignore-path .gitignore --fix",
-    "test": "jest --verbose --runInBand"
+    "lint": "eslint .",
+    "test": "jest --verbose --runInBand",
+    "start:test": "jest node src/server.js"
   },
   "author": "Uladzimir Yeudakimovich",
   "license": "MIT",
