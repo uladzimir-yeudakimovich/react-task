@@ -34,6 +34,11 @@ app.use('/api/courses', coursesRouter);
 app.use('/api/persons', personsRouter);
 app.use('/api/users', checkToken, usersRouter);
 
+if (process.env.NODE_ENV === 'development') {
+  const testingRouter = require('./routers/testing/testing.router');
+  app.use('/api/testing', testingRouter);
+}
+
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
