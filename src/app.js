@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 require('express-async-errors');
 const app = express();
 const cors = require('cors');
@@ -16,6 +17,7 @@ const unknownEndpoint = require('./middleware/unknown-endpoint');
 const errorHandler = require('./middleware/error-handler');
 
 app.use(cors());
+app.use(helmet());
 app.use(express.static('build'));
 app.use(express.json());
 app.use(showRequestLogger);
