@@ -22,6 +22,7 @@ module.exports = {
   },
   info: '/info',
   login: '/login',
+  registration: '/registration',
   persons: {
     getAll: '/api/persons',
     getById: id => `/api/persons/${id}`,

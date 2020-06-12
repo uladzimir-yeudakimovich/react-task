@@ -16,3 +16,7 @@ Runs the tests in the development database.
 ### `npm test -- -t 'test name'`
 
 Runs one test in the development database.
+
+### `npm run-script lint`
+
+Runs the security tests

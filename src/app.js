@@ -7,6 +7,7 @@ const cors = require('cors');
 const { showRequestLogger, saveRequestLogger } = require('./middleware/logger');
 const infoRouter = require('./routers/info/info.router');
 const loginRouter = require('./routers/login/login.router');
+const registrationRouter = require('./routers/registration/registration.router');
 const anecdotesRouter = require('./routers/anecdotes/anecdotes.router');
 const blogsRouter = require('./routers/blogs/blog.router');
 const coursesRouter = require('./routers/courses/courses.router');
@@ -30,6 +31,7 @@ app.use('/', (req, res, next) => {
 
 app.use('/info', infoRouter);
 app.use('/login', loginRouter);
+app.use('/registration', registrationRouter);
 app.use('/api/anecdotes', anecdotesRouter);
 app.use('/api/blogs', checkToken, blogsRouter);
 app.use('/api/courses', coursesRouter);
