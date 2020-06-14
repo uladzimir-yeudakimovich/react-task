@@ -31,12 +31,12 @@ describe('Registration suite', () => {
         });
     });
 
-    it('should get 400 and validation failed login ', async () => {
+    it('should get validation failed login ', async () => {
       await request
         .post(routes.registration)
         .set('Accept', 'application/json')
         .send(TEST_USER_DATA)
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -45,12 +45,12 @@ describe('Registration suite', () => {
         });
     });
 
-    it('should get 400 and validation failed password ', async () => {
+    it('should get validation failed password ', async () => {
       await request
         .post(routes.registration)
         .set('Accept', 'application/json')
         .send({})
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -59,12 +59,12 @@ describe('Registration suite', () => {
         });
     });
 
-    it('should get 400 and validation failed password ', async () => {
+    it('should get validation failed password ', async () => {
       await request
         .post(routes.registration)
         .set('Accept', 'application/json')
         .send({ login: 'TEST' })
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -73,12 +73,12 @@ describe('Registration suite', () => {
         });
     });
 
-    it('should get 400 and validation failed login ', async () => {
+    it('should get validation failed login ', async () => {
       await request
         .post(routes.registration)
         .set('Accept', 'application/json')
         .send({ password: '337755' })
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -87,7 +87,7 @@ describe('Registration suite', () => {
         });
     });
 
-    it('should get 400 and validation failed login length ', async () => {
+    it('should get validation failed login length ', async () => {
       await request
         .post(routes.registration)
         .set('Accept', 'application/json')
@@ -95,7 +95,7 @@ describe('Registration suite', () => {
           login: 'TE',
           password: '135244'
         })
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -104,7 +104,7 @@ describe('Registration suite', () => {
         });
     });
 
-    it('should get 400 and validation failed password length ', async () => {
+    it('should get validation failed password length ', async () => {
       await request
         .post(routes.registration)
         .set('Accept', 'application/json')
@@ -112,7 +112,7 @@ describe('Registration suite', () => {
           login: 'NEW_TEST_LOGIN',
           password: '1230'
         })
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(

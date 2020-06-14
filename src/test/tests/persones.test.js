@@ -38,12 +38,12 @@ describe('Persones suite', () => {
         });
     });
 
-    it('should get 400 and validation failed name ', async () => {
+    it('should get validation failed name ', async () => {
       await request
         .post(routes.persons.create)
         .set('Accept', 'application/json')
         .send(TEST_PERSONES_DATA)
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -52,12 +52,12 @@ describe('Persones suite', () => {
         });
     });
 
-    it('should get 400 and validation failed number ', async () => {
+    it('should get validation failed number ', async () => {
       await request
         .post(routes.persons.create)
         .set('Accept', 'application/json')
         .send({})
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -66,12 +66,12 @@ describe('Persones suite', () => {
         });
     });
 
-    it('should get 400 and validation failed number ', async () => {
+    it('should get validation failed number ', async () => {
       await request
         .post(routes.persons.create)
         .set('Accept', 'application/json')
         .send({ name: 'TEST' })
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -80,12 +80,12 @@ describe('Persones suite', () => {
         });
     });
 
-    it('should get 400 and validation failed name ', async () => {
+    it('should get validation failed name ', async () => {
       await request
         .post(routes.persons.create)
         .set('Accept', 'application/json')
         .send({ number: '123-456-789' })
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -94,7 +94,7 @@ describe('Persones suite', () => {
         });
     });
 
-    it('should get 400 and validation failed name length ', async () => {
+    it('should get validation failed name length ', async () => {
       await request
         .post(routes.persons.create)
         .set('Accept', 'application/json')
@@ -102,7 +102,7 @@ describe('Persones suite', () => {
           name: 'TE',
           number: '123-456-789'
         })
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -111,7 +111,7 @@ describe('Persones suite', () => {
         });
     });
 
-    it('should get 400 and validation failed number length ', async () => {
+    it('should get validation failed number length ', async () => {
       await request
         .post(routes.persons.create)
         .set('Accept', 'application/json')
@@ -119,7 +119,7 @@ describe('Persones suite', () => {
           name: 'TEST',
           number: '123-456'
         })
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
@@ -207,12 +207,12 @@ describe('Persones suite', () => {
         });
     });
 
-    it('should get 400 and det validation error ', async () => {
+    it('should get validation error ', async () => {
       await request
         .put(routes.persons.update(secondPersoneId))
         .set('Accept', 'application/json')
         .send(UPDATE_PERSONES_DATA)
-        .expect(400)
+        .expect(200)
         .expect('Content-Type', /json/)
         .then(res => {
           expect(res.body.error).toContain(
