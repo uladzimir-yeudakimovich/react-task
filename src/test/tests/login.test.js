@@ -16,6 +16,10 @@ describe('Login suite', () => {
       .then(res => {
         expect(res.body.message).toContain('Successful login.');
         expect(res.body.token).toContain('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV');
+        expect(res.body.user.password).toBeUndefined();
+        expect(res.body.user).toMatchObject({
+          login: TEST_USER_DATA.login
+        });
       });
   });
 

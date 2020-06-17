@@ -13,7 +13,10 @@ const loginUser = async (login, password) => {
   }
   const { id } = user;
   const userForToken = { id, login };
-  return sign(userForToken, JWT_SECRET_KEY, { expiresIn: '30m' });
+  return {
+    user,
+    token: sign(userForToken, JWT_SECRET_KEY, { expiresIn: '30m' })
+  };
 };
 
 module.exports = { loginUser };
