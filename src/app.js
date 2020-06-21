@@ -10,6 +10,7 @@ const loginRouter = require('./routers/login/login.router');
 const registrationRouter = require('./routers/registration/registration.router');
 const anecdotesRouter = require('./routers/anecdotes/anecdotes.router');
 const blogsRouter = require('./routers/blogs/blog.router');
+const commentsRouter = require('./routers/comments/comments.router');
 const coursesRouter = require('./routers/courses/courses.router');
 const personsRouter = require('./routers/persons/persons.router');
 const usersRouter = require('./routers/users/user.router');
@@ -32,10 +33,11 @@ app.use('/', (req, res, next) => {
 app.use('/info', infoRouter);
 app.use('/login', loginRouter);
 app.use('/registration', registrationRouter);
-app.use('/api/anecdotes', anecdotesRouter);
+app.use('/api/anecdotes', checkToken, anecdotesRouter);
 app.use('/api/blogs', checkToken, blogsRouter);
-app.use('/api/courses', coursesRouter);
-app.use('/api/persons', personsRouter);
+app.use('/api/blogs/:id/comments', checkToken, commentsRouter);
+app.use('/api/courses', checkToken, coursesRouter);
+app.use('/api/persons', checkToken, personsRouter);
 app.use('/api/users', checkToken, usersRouter);
 
 if (process.env.NODE_ENV === 'development') {
