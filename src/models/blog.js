@@ -12,14 +12,15 @@ const blogSchema = new Schema(
       name: String
     },
     url: { type: String, required: true },
-    likes: { type: Number, default: 0 }
+    likes: { type: Number, default: 0 },
+    comments: Array
   },
   { versionKey: false }
 );
 
 blogSchema.statics.toResponse = blog => {
-  const { id, title, author, user, url, likes } = blog;
-  return { id, title, author, user, url, likes };
+  const { id, title, author, user, url, likes, comments } = blog;
+  return { id, title, author, user, url, likes, comments };
 };
 
 const Blog = model('Blog', blogSchema);

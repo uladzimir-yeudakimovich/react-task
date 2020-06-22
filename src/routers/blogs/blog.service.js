@@ -3,6 +3,7 @@ const usersService = require('../users/user.service');
 const User = require('../../models/user.model');
 
 const getAll = () => blogRepo.getAll();
+const getBlog = id => blogRepo.getBlog(id);
 
 const addBlog = async (blog, id) => {
   const findUser = await usersService.getUser(id);
@@ -42,4 +43,4 @@ const deleteBlog = async (blogId, userId) => {
   return;
 };
 
-module.exports = { getAll, addBlog, editBlog, deleteBlog };
+module.exports = { getAll, getBlog, addBlog, editBlog, deleteBlog };

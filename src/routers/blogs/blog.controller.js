@@ -1,6 +1,7 @@
 const Blog = require('../../models/blog');
 
 const getAll = async () => Blog.find({});
+const getBlog = async id => Blog.findById(id);
 const addBlog = async blog => Blog.create(blog);
 const updateBlog = async (id, blog) => {
   await Blog.findByIdAndUpdate(id, blog);
@@ -8,4 +9,4 @@ const updateBlog = async (id, blog) => {
 };
 const deleteBlog = async id => Blog.findByIdAndDelete(id);
 
-module.exports = { getAll, addBlog, updateBlog, deleteBlog };
+module.exports = { getAll, getBlog, addBlog, updateBlog, deleteBlog };
