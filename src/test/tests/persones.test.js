@@ -1,4 +1,5 @@
-const { request, routes } = require('../lib');
+const { request: unAuthReq, routes } = require('../lib');
+const authReq = require('../utils/auth-req');
 
 const TEST_PERSONES_DATA = {
   name: 'TEST_USER',
@@ -11,7 +12,12 @@ const UPDATE_PERSONES_DATA = {
 };
 
 describe('Persones suite', () => {
+  let request = unAuthReq;
   let personeId;
+
+  beforeAll(async () => {
+    request = await authReq(unAuthReq);
+  });
 
   test('should get all persons', async () => {
     await request

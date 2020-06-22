@@ -1,4 +1,5 @@
-const { request, routes } = require('../lib');
+const { request: unAuthReq, routes } = require('../lib');
+const authReq = require('../utils/auth-req');
 
 const TEST_COURSES_DATA = {
   name: 'Autotest course',
@@ -9,7 +10,12 @@ const TEST_COURSES_DATA = {
 };
 
 describe('Courses suite auth', () => {
+  let request = unAuthReq;
   let courseId;
+
+  beforeAll(async () => {
+    request = await authReq(unAuthReq);
+  });
 
   test('should get all courses', async () => {
     await request

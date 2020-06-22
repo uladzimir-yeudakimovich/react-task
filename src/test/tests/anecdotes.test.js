@@ -1,4 +1,5 @@
-const { request, routes } = require('../lib');
+const { request: unAuthReq, routes } = require('../lib');
+const authReq = require('../utils/auth-req');
 
 const TEST_ANECDOTES_DATA = {
   text: 'TEST_TEXT',
@@ -6,7 +7,12 @@ const TEST_ANECDOTES_DATA = {
 };
 
 describe('Anecdotes suite auth', () => {
+  let request = unAuthReq;
   let anecdoteId;
+
+  beforeAll(async () => {
+    request = await authReq(unAuthReq);
+  });
 
   test('should get all anecdotes', async () => {
     await request
